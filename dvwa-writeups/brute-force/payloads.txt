@@ -1,0 +1,23 @@
+# Brute Force - Common Passwords (payloads.txt)
+# Use these with Hydra or Burp Suite Intruder
+
+password
+123456
+admin
+password123
+letmein
+welcome
+monkey
+dragon
+master
+1234
+qwerty
+abc123
+111111
+iloveyou
+sunshine
+princess
+football
+shadow
+superman
+michael

